@@ -10,6 +10,7 @@
 	    <param-value>12</param-value>
   	</context-param>
   
+	<!-- SERVLET ROUTES -->
 	<servlet>
 		<servlet-name>App</servlet-name>
 		<display-name>App</display-name>
@@ -17,10 +18,10 @@
 		<servlet-class>controller.App</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>ProcessOrder</servlet-name>
-		<display-name>ProcessOrder</display-name>
+		<servlet-name>Process</servlet-name>
+		<display-name>Process</display-name>
 		<description></description>
-		<servlet-class>controller.ProcessOrder</servlet-class>
+		<servlet-class>controller.Process</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>Remove</servlet-name>
@@ -40,13 +41,20 @@
 		<description></description>
 		<servlet-class>controller.Item</servlet-class>
 	</servlet>
+	
+	
+	
+	
+	
+	
+	<!-- SERVLET MAPPINGS -->
 	<servlet-mapping>
 		<servlet-name>App</servlet-name>
 		<url-pattern>/App</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>ProcessOrder</servlet-name>
-		<url-pattern>/ProcessOrder</url-pattern>
+		<servlet-name>Process</servlet-name>
+		<url-pattern>/Process</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Remove</servlet-name>

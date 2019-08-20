@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import exceptions.CreditCardException;
+import utility.Logger;
 
 public class Order implements model.OnlineOrderingSystem {
 	
@@ -131,6 +132,55 @@ public class Order implements model.OnlineOrderingSystem {
 	
 	
 	
+	
+	// CART OPERATIONS
+	public boolean addItemToCart(Product item) {
+		if(this.cart.addItem(item)) {
+			System.out.println("( "+ new SimpleDateFormat().format(new Date()) + " ) Successfully added an item added the cart!");
+			System.out.println("( "+ new SimpleDateFormat().format(new Date()) + " ) Shopping Cart UPDATED!");
+			recaculatePrice();
+			return true;
+		}
+		
+		return false;
+	}
+	public boolean removeItemFromCart(int index) {
+		if(this.cart.removeItem(index)) {
+			System.out.println("( "+ new SimpleDateFormat().format(new Date()) + " ) Successfully REMOVED an item from the cart!");
+			recaculatePrice();
+			return true;			
+		}
+		
+		return false;
+	}
+	public Product getItemFromCart(int index) {
+		Product p = this.cart.getItem(index);
+		if(p != null) {
+			return p;
+		}
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+	// RETURN PRICE STRINGS
+	public String getSubtotal() {
+		return String.format("%,.2f", grossPrice);
+	}
+	public String getVAT() {
+		return String.format("%,.2f", valueAddedTax);
+	}
+	public String getTotal() {
+		return String.format("%,.2f", netPrice);
+	}
+	
+	
+	
+	
+	// ORDER OPERATIONS
 	public ArrayList<Product> getOrderCart() {
 		return cart.getCartItems();
 	}
@@ -143,12 +193,6 @@ public class Order implements model.OnlineOrderingSystem {
 	public void setOrderDate(Date date) {
 		this.dateOrdered = new SimpleDateFormat().format(new Date());
 	}
-	
-	
-	
-	
-	
-	
 	public boolean processOrder(User user) {
 		this.user = user;				// set new user for the current order
 		this.validateCreditCard();		// validate user's credit card
@@ -159,5 +203,52 @@ public class Order implements model.OnlineOrderingSystem {
 		}
 		
 		return false; // failed transaction
+	}
+	
+	
+	
+	
+	
+	
+	public ArrayList<Product> updateStocks(ArrayList<Product> product_list) {
+		Product item = null;
+		String id = null;
+		int quantity = 0;
+		int stocks;
+		
+		Logger.log("Updating Product Stocks...");
+		
+		for(int index=0; index < cart.getCartItems().size(); ++index) { //for every item in the cart get its quantity
+			item = this.cart.getItem(index);
+			id = item.getId();
+			quantity = item.getQuantity();
+			
+			System.out.println("SEARCHING PRODUCT LIST FOR [PRODUCT_ID: " + id + "]");
+			
+			// find the item in the product list
+			for(Product product : product_list) {
+				if(id.equals(product.getId())) {
+					System.out.println("\nITEM FOUND!");
+					System.out.println("ID: " + product.getId());
+					System.out.println("Stocks: " + product.getItem_stocks());
+					stocks = product.getItem_stocks() - quantity;
+					product.setItem_stocks(stocks);
+					System.out.println(product.getId() + " Stock Quantity Updated: " + product.getItem_stocks());
+					break;
+				}
+			}
+		}
+		
+		return product_list;
+	}
+	
+	public void logProductsStock(ArrayList<Product> products) {
+		// display all the product stocks
+		System.out.println("\nProduct List::::::::::::::::::::::::::::::::::::::::::::");
+		for(Product p : products) {
+			System.out.println("ID: " + p.getId());
+			System.out.println("Stocks Left: " + p.getItem_stocks() + "\n");
+		}
+		System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
 	}
 }

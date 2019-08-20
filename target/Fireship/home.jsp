@@ -61,7 +61,7 @@
 			<%-- RENDER ALL PRODUCTS --------------------------------------------------------------------------------------------- --%>
 			<% for(Product p : products) { %>
 	            <!-- Loop -->
-	            <a href="ViewItem?id=<%= p.getId() %>">
+	            <a href="Item?id=<%= p.getId() %>">
 	                <div class="item"> <!-- ITEM CARD -->
 	                    <div class="product_image_container">
 	                        <img class="product_image" src="./assets/item_images/<%= p.getImage_path() %>" alt="">
