@@ -1,0 +1,233 @@
+@import url("./font.css");
+
+/* navigation bar */
+nav {
+    background-color: #ffffff;
+    width: 100%;
+
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    
+    padding: 5px;
+    border-bottom: 0.3px #e6e6e6 solid;
+    
+    display: flex;
+    position: fixed;
+    top: 0;
+
+    z-index: 5;
+}
+
+.fireship_logo {
+    margin-left: 10px;
+    height: 35px;
+}
+
+.cart_icon {
+    padding-right: 10px;
+    color: #D6D6D6;
+}
+
+.cart_icon:hover {
+    color: #c2c2c2;
+}
+
+
+
+/* main contents */
+.wrapper_container {
+    /* background-color: #c2c2c2; */
+    max-width: 97%;
+    padding: 10px 0px;
+    margin: 60px auto 0px auto;
+}
+
+.return_link {
+    text-decoration: none;
+    color: #c2c2c2;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+.caret {
+    margin-right: 5px;
+}
+
+.return_link:hover {
+    color: #929292;
+}
+
+.product_image_container {
+    /* background-color: yellowgreen; */
+    width: 100%;
+}
+
+.product_image {
+    max-width: 100%;
+}
+
+.product_details {
+    font-family: 'Google Sans', sans-serif;
+    padding: 10px;
+}
+
+.product_name {
+    margin-bottom: 10px;
+    line-height: 20px;
+}
+
+.product_price {
+    color: #FF9B9B;
+    font-weight: bold;
+    margin-bottom: 5px;
+    line-height: 20px;
+}
+
+.rating {
+}
+
+.rating .star {
+    height: 15px;
+    margin-bottom: 30px;
+}
+
+.quantity_label {
+    color: #D1D1D1;
+    margin-right: 10px;
+}
+.quantity_field {
+    border: 0.5px #d3d3d3 solid;
+    border-radius: 5px;
+    width: 50px;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-right: 20px;
+}
+.add_button {
+    background-color: #FF9B9B;
+    border: none;
+    color: white;
+    font-family: 'Google Sans', sans-serif;
+    padding: 12px 30px;
+    width: 100%;
+}
+.add_button:hover {
+	cursor: pointer;
+}
+
+/* disabled */
+.disabled_add_button {
+	background-color: #eaeaea !important;
+	color: lightgrey !important;
+}
+.disabled_add_button:hover {
+	cursor: default;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* For Tablets and Desktops */
+@media only screen and (min-width: 768px) {
+    /* main contents */
+    .wrapper_container {
+        /* background-color: #c2c2c2; */
+        max-width: 70%;
+        min-height: 70vh;
+        padding: 10px 0px;
+        margin: 60px auto 0px auto;
+    }
+
+    .return_link {
+        text-decoration: none;
+        color: #c2c2c2;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+    .caret {
+        margin-right: 5px;
+    }
+
+    .return_link:hover {
+        color: #929292;
+    }
+
+    .product_view {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 1px #e2e2e2 solid;
+    }
+
+    .image_container {
+        /* background-color: red; */
+        width: auto;
+        height: 100%;
+        border-right: 1px #e2e2e2 solid;
+    }
+
+    .product_image {
+        max-width: 100%;
+    }
+
+    .product_details {
+        /* background-color: burlywood; */
+        font-family: 'Google Sans', sans-serif;
+        padding: 30px;
+    }
+
+    .product_name {
+        margin-bottom: 10px;
+        line-height: 20px;
+    }
+
+    .product_price {
+        color: #FF9B9B;
+        font-weight: bold;
+        margin-bottom: 5px;
+        line-height: 20px;
+    }
+
+    .rating {
+    }
+
+    .rating .star {
+        height: 15px;
+        margin-bottom: 30px;
+    }
+
+    .quantity_label {
+        color: #D1D1D1;
+        margin-right: 10px;
+    }
+    .quantity_field {
+        border: 0.5px #d3d3d3 solid;
+        border-radius: 5px;
+        width: 50px;
+        padding: 10px;
+        margin-bottom: 15px;
+        margin-right: 20px;
+    }
+    .add_button {
+        background-color: #FF9B9B;
+        border: none;
+        color: white;
+        font-family: 'Google Sans', sans-serif;
+        padding: 12px 30px;
+        width: 100%;
+    }
+    .add_button:hover {
+		cursor: pointer;
+	}
+}
