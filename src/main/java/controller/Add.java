@@ -12,10 +12,6 @@ import model.Product;
 public class Add extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name 		= request.getParameter("item_name").trim();
 		Double price 		= Double.parseDouble(request.getParameter("item_price").trim());
@@ -29,9 +25,10 @@ public class Add extends HttpServlet {
 		Product item = new Product(id, name, imageName, price, stocks, rating, quantity);
 		
 		// get cart from app context
-		Order order = (Order) getServletContext().getAttribute("ORDER");
+		Order order = (Order) request.getSession().getAttribute("ORDER");
 		
-		if(order.addItemToCart(item)) {
+		if(order.getCart().addItem(item)) {
+			order.recaculatePrice();
 			response.sendRedirect("home.jsp");
 		}
 	}

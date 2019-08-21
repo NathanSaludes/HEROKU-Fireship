@@ -1,3 +1,4 @@
+<%@page import="model.Cart"%>
 <%@page import="model.Order"%>
 <%@page import="model.Product"%>
 <%@page import="java.util.ArrayList"%>
@@ -5,8 +6,7 @@
     pageEncoding="ISO-8859-1"%>
     
 <% 
-	Order order = (Order) application.getAttribute("ORDER");
-	ArrayList<Product> cart = order.getOrderCart();
+	Order order = (Order) session.getAttribute("ORDER");	
 	Product item = (Product) request.getAttribute("ITEM");
 %>
     
@@ -18,7 +18,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="./assets/fire.png" type="image/x-icon">
 
-    <title><%= item.getId() %></title>
+    <title><%= item.getName() %></title>
 
     <!-- CSS Reset -->
     <link rel="stylesheet" href="./styles/reset.css">
@@ -37,7 +37,7 @@
         <a class="cart_icon" href="cart.jsp">
         
         	<%-- SHOPPING CART STATE RENDERING | (Gray : Empty Cart) & (Yellow : Items present) ---------------------------------- --%>
-	        <% if(cart.size() > 0) { %>
+	        <% if(order.getCart().hasItems()) { %>
 	        	<i class="fas fa-shopping-cart cart_icon" style="color: #ffcd43"></i>
 	        <% } else { %>
 	            <i class="fas fa-shopping-cart cart_icon"></i>        
@@ -66,8 +66,9 @@
                     	<img class="star" src="./assets/Star.svg" alt="rating">
                     <% } %>
                 </div>
-                <form action="Add" method="post">
                 
+                
+                <form action="Add" method="post">
                     <!-- HIDDEN FIELDS ------------------------------------------------------------------------- -->
                     <input type="hidden" name="item_image" 	value="<%= item.getImage_path() %>	">
                     <input type="hidden" name="item_stocks" value="<%=item.getItem_stocks() %>	">
@@ -82,6 +83,7 @@
                     <br>
                     <input class="add_button" type="submit" value="Add to Cart">
                 </form>
+                
             </div>
         </div>
     </div>

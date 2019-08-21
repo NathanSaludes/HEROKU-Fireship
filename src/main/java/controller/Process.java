@@ -16,10 +16,6 @@ import utility.Logger;
 
 public class Process extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String firstName;
@@ -37,8 +33,8 @@ public class Process extends HttpServlet {
 		Logger.log("PROCESSING ORDER...");
 		
 		// get the order object
-		Order order = (Order) getServletContext().getAttribute("ORDER");
-				
+		Order order = (Order) request.getSession().getAttribute("ORDER");
+		
 		if(order.processOrder(newUser)) {
 			Logger.log("ORDER TRANSACTION SUCCESS. [Order date]: " + order.getOrderDate());
 			ArrayList<Product> product_list = (ArrayList<Product>) getServletContext().getAttribute("PRODUCTS_LIST");
@@ -52,17 +48,11 @@ public class Process extends HttpServlet {
 			
 			// reset order object to prepare for the next order
 			Order newOrder = new Order();
-			newOrder.reset(Float.parseFloat(getServletContext().getInitParameter("VAT_RATE")));
+			newOrder.reset(Float.parseFloat(getServletContext().getInitParameter("VAT_RATE")));			
 			
-			
-			// TEST =================================================================================================================================================
-			// new OrderHistoryTesting().main(order_history);
-			// TEST =================================================================================================================================================
-			
-			
-			// set the new order object to the servlet context else
+			// set the new order object to the session else
 			// it will keep the data of the previous order regardless if it's valid or invalid
-			getServletContext().setAttribute("ORDER", newOrder);
+			request.getSession().setAttribute("ORDER", newOrder);
 			getServletContext().setAttribute("PRODUCTS_LIST", product_list);
 			getServletContext().setAttribute("ORDER_HISTORY", order_history);
 			

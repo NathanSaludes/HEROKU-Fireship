@@ -10,7 +10,8 @@
 	    <param-value>12</param-value>
   	</context-param>
   
-	<!-- SERVLET ROUTES -->
+  
+	<!-- ROUTES -->
 	<servlet>
 		<servlet-name>App</servlet-name>
 		<display-name>App</display-name>
@@ -45,9 +46,7 @@
 	
 	
 	
-	
-	
-	<!-- SERVLET MAPPINGS -->
+	<!-- MAPPINGS -->
 	<servlet-mapping>
 		<servlet-name>App</servlet-name>
 		<url-pattern>/App</url-pattern>
@@ -72,4 +71,9 @@
 	<welcome-file-list>
     	<welcome-file>App</welcome-file>
 	</welcome-file-list>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.jsp</location>
+	</error-page>
 </web-app>

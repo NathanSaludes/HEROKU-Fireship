@@ -54,14 +54,7 @@ public class User {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	/*----- CREDIT CARD OPERATIONS -----*/
 	public void setCreditCardNumber(String credit) {
 		credit = credit.replaceAll(" ", "");	// remove whitespaces
 		this.creditCard = credit;

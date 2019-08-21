@@ -1,3 +1,4 @@
+<%@page import="model.Cart"%>
 <%@page import="model.Order"%>
 <%@page import="model.Product"%>
 <%@page import="java.util.ArrayList"%>
@@ -5,8 +6,8 @@
 
 <% 
 	ArrayList<Product> products = (ArrayList<Product>) application.getAttribute("PRODUCTS_LIST");
-	Order order = (Order) application.getAttribute("ORDER");
-	ArrayList<Product> cart = order.getOrderCart();
+	Order order = (Order) session.getAttribute("ORDER");
+	Cart cart = order.getCart();
 %>
 
 <!DOCTYPE html>
@@ -39,7 +40,7 @@
         <a class="cart_icon" href="cart.jsp">
         
         	<%-- SHOPPING CART STATE RENDERING | (Gray : Empty Cart) & (Yellow : Items present) ---------------------------------- --%>
-	        <% if(cart.size() > 0) { %>
+	        <% if(cart.hasItems()) { %>
 	        	<i class="fas fa-shopping-cart cart_icon" style="color: #ffcd43"></i>
 	        <% } else { %>
 	            <i class="fas fa-shopping-cart cart_icon"></i>        
@@ -59,18 +60,18 @@
         <div class="item_list_container">
 
 			<%-- RENDER ALL PRODUCTS --------------------------------------------------------------------------------------------- --%>
-			<% for(Product p : products) { %>
+			<% for(Product product : products) { %>
 	            <!-- Loop -->
-	            <a href="Item?id=<%= p.getId() %>">
+	            <a href="Item?id=<%= product.getId() %>">
 	                <div class="item"> <!-- ITEM CARD -->
 	                    <div class="product_image_container">
-	                        <img class="product_image" src="./assets/item_images/<%= p.getImage_path() %>" alt="">
+	                        <img class="product_image" src="./assets/item_images/<%= product.getImage_path() %>" alt="">
 	                    </div>
 	                    <div class="product_info">
-	                        <p class="product_name"><%= p.getName() %></p>
-	                        <p class="product_price">&#8369;<%= String.format("%,.2f", p.getPrice()) %></p>
+	                        <p class="product_name"><%= product.getName() %></p>
+	                        <p class="product_price">&#8369;<%= String.format("%,.2f", product.getPrice()) %></p>
 	                        <div class="rating">
-	                        <% for(int j=0; j < p.getRating() ; ++j) { %>
+	                        <% for(int j=0; j < product.getRating() ; ++j) { %>
 	                           	<img class="star" src="assets/Star.svg" alt="rating">
 	                        <% } %>
 	                        </div>

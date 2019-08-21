@@ -7,7 +7,9 @@ import java.util.Date;
 import exceptions.CreditCardException;
 import utility.Logger;
 
-public class Order implements model.OnlineOrderingSystem {
+import model.OnlineOrderingSystem;
+
+public class Order implements OnlineOrderingSystem {
 	
 	private Cart cart;
 	private User user;
@@ -30,6 +32,7 @@ public class Order implements model.OnlineOrderingSystem {
 		netPrice = 0.00;
 	}
 	
+	/*----- ORDER OPERATIONS -----*/
 	public void reset(float vat_rate) {
 		cart 			= new Cart();	// INITIALIZE CART CONTAINER
 		user 			= null;			// USER UNSET
@@ -43,7 +46,7 @@ public class Order implements model.OnlineOrderingSystem {
 		recaculatePrice();
 	}
 
-	private void recaculatePrice() {
+	public void recaculatePrice() {
 		grossPrice = 0;
 		valueAddedTax = 0;
 		
@@ -55,7 +58,20 @@ public class Order implements model.OnlineOrderingSystem {
 	public void setVatRate(float vat_rate) {
 		this.vatRate = (vat_rate / 100);
 	}
+	
+	// RETURN COMPUTED VALUES AS STRING
+	public String getSubtotal() {
+		return String.format("%,.2f", grossPrice);
+	}
+	public String getVAT() {
+		return String.format("%,.2f", valueAddedTax);
+	}
+	public String getTotal() {
+		return String.format("%,.2f", netPrice);
+	}
+		
 
+	/*------------------------------------------------------------ INTERFACE METHODS ------------------------------------------------------------*/
 	@Override
 	public void validateCreditCard() {
 		try {
@@ -96,6 +112,7 @@ public class Order implements model.OnlineOrderingSystem {
 			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
+			
 		} catch (CreditCardException e) {
 			System.err.println(e.getMessage());
 		}
@@ -121,70 +138,17 @@ public class Order implements model.OnlineOrderingSystem {
 
 	@Override
 	public void printPDFSalesReport() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void generatePDFReceipt() {		
 	}
+	/*------------------------------------------------------------ INTERFACE METHODS ------------------------------------------------------------*/	
 	
-	
-	
-	
-	
-	
-	// CART OPERATIONS
-	public boolean addItemToCart(Product item) {
-		if(this.cart.addItem(item)) {
-			System.out.println("( "+ new SimpleDateFormat().format(new Date()) + " ) Successfully added an item added the cart!");
-			System.out.println("( "+ new SimpleDateFormat().format(new Date()) + " ) Shopping Cart UPDATED!");
-			recaculatePrice();
-			return true;
-		}
-		
-		return false;
+	public Cart getCart() {
+		return this.cart;
 	}
-	public boolean removeItemFromCart(int index) {
-		if(this.cart.removeItem(index)) {
-			System.out.println("( "+ new SimpleDateFormat().format(new Date()) + " ) Successfully REMOVED an item from the cart!");
-			recaculatePrice();
-			return true;			
-		}
-		
-		return false;
-	}
-	public Product getItemFromCart(int index) {
-		Product p = this.cart.getItem(index);
-		if(p != null) {
-			return p;
-		}
-		
-		return null;
-	}
-	
-	
-	
-	
-	
-	// RETURN PRICE STRINGS
-	public String getSubtotal() {
-		return String.format("%,.2f", grossPrice);
-	}
-	public String getVAT() {
-		return String.format("%,.2f", valueAddedTax);
-	}
-	public String getTotal() {
-		return String.format("%,.2f", netPrice);
-	}
-	
-	
-	
-	
-	// ORDER OPERATIONS
-	public ArrayList<Product> getOrderCart() {
-		return cart.getCartItems();
-	}
-	public User getOrderUser() {
+	public User getUser() {
 		return this.user;
 	}
 	public String getOrderDate() {
@@ -193,6 +157,8 @@ public class Order implements model.OnlineOrderingSystem {
 	public void setOrderDate(Date date) {
 		this.dateOrdered = new SimpleDateFormat().format(new Date());
 	}
+	
+	
 	public boolean processOrder(User user) {
 		this.user = user;				// set new user for the current order
 		this.validateCreditCard();		// validate user's credit card
@@ -204,6 +170,12 @@ public class Order implements model.OnlineOrderingSystem {
 		
 		return false; // failed transaction
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
