@@ -70,7 +70,7 @@ public class Config {
 		if(product_list.size() < 1) {
 			Logger.log("ATTENTION: THERE ARE NO ITEMS IN THE PRODUCT LIST.");
 		} else {
-			Logger.log("LOADING PRODUCTS TO FIRESHIP!");
+			Logger.log("LOADING PRODUCTS LIST TO FIRESHIP!");
 		}
 		
 		return product_list;
