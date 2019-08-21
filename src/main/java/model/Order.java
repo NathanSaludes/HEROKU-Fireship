@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import exceptions.CreditCardException;
+import exceptions.OrderException;
 import utility.Logger;
 
 import model.OnlineOrderingSystem;
@@ -114,7 +115,7 @@ public class Order implements OnlineOrderingSystem {
 			e.printStackTrace();
 			
 		} catch (CreditCardException e) {
-			System.err.println(e.getMessage());
+			Logger.error(e.getMessage());
 		}
 	}
 
@@ -160,12 +161,24 @@ public class Order implements OnlineOrderingSystem {
 	
 	
 	public boolean processOrder(User user) {
-		this.user = user;				// set new user for the current order
-		this.validateCreditCard();		// validate user's credit card
 		
-		if(this.user.isCreditCardStatus()) {
-			setOrderDate(new Date());
-			return true; // success
+		try {
+			// check if cart has items
+			if(this.cart.hasItems()) {
+				this.user = user;				// set new user for the current order
+				this.validateCreditCard();		// validate user's credit card
+				
+				if(this.user.isCreditCardStatus()) {
+					setOrderDate(new Date());
+					return true; // success
+				}
+				
+			} else {
+				throw new OrderException("You have no items on the cart");
+			}
+			
+		} catch (OrderException e) {
+			Logger.error(e.getMessage());
 		}
 		
 		return false; // failed transaction
@@ -195,17 +208,18 @@ public class Order implements OnlineOrderingSystem {
 			id = item.getId();
 			quantity = item.getQuantity();
 			
-			System.out.println("SEARCHING PRODUCT LIST FOR [PRODUCT_ID: " + id + "]");
+			Logger.log("SEARCHING PRODUCT LIST FOR [PRODUCT_ID: " + id + "]");
 			
 			// find the item in the product list
 			for(Product product : product_list) {
 				if(id.equals(product.getId())) {
-					System.out.println("\nITEM FOUND!");
+					Logger.log("ITEM FOUND!");
+					System.out.println("\nITEM:");
 					System.out.println("ID: " + product.getId());
-					System.out.println("Stocks: " + product.getItem_stocks());
+					System.out.println("Stocks: " + product.getItem_stocks() + "\n");
 					stocks = product.getItem_stocks() - quantity;
 					product.setItem_stocks(stocks);
-					System.out.println(product.getId() + " Stock Quantity Updated: " + product.getItem_stocks());
+					Logger.log("Updated stock quantity of item [" + product.getId() + "]: " + product.getItem_stocks() + " left\n");
 					break;
 				}
 			}
@@ -216,11 +230,11 @@ public class Order implements OnlineOrderingSystem {
 	
 	public void logProductsStock(ArrayList<Product> products) {
 		// display all the product stocks
-		System.out.println("\nProduct List::::::::::::::::::::::::::::::::::::::::::::");
+		System.out.println("\nProduct List ==================================================================");
 		for(Product p : products) {
 			System.out.println("ID: " + p.getId());
 			System.out.println("Stocks Left: " + p.getItem_stocks() + "\n");
 		}
-		System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+		System.out.println("===============================================================================");
 	}
 }

@@ -1,3 +1,4 @@
+<%@page import="utility.Logger"%>
 <%@page import="model.Cart"%>
 <%@page import="model.Order"%>
 <%@page import="model.Product"%>
@@ -8,7 +9,16 @@
 <% 
 	// get cart items
 	Order order = (Order) session.getAttribute("ORDER");
-	Cart cart = order.getCart();
+	Cart cart = new Cart();
+	
+	if(order != null) {
+		cart = order.getCart();		
+	} else {
+		Logger.error("Session expired.");
+		order = new Order();
+		session.invalidate();
+		response.sendRedirect("App");
+	}
 %>
     
 <!DOCTYPE html>

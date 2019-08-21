@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Product;
+import utility.Logger;
 
 public class Item extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,36 +21,25 @@ public class Item extends HttpServlet {
 		// get product id from url parameter
 		String productId = request.getParameter("id");
 		
-		// products fields
-		String item_id = null;
-		String item_name = null;
-		String imageName = null;
-		double item_price = 0;
-		int item_rating = 0;
-		int item_stock = 0;
-		
 		// if product list has no items redirect to homepage
 		if(prodList.size() > 0) {
+			Product item = null;
 			
-			for(Product p : prodList) {
-				// get item
-				if(p.getId().equals(productId)) {
-					item_id		= p.getId();
-					item_name	= p.getName();
-					item_price	= p.getPrice();
-					imageName	= p.getImage_path();
-					item_rating	= p.getRating();
-					item_stock	= p.getItem_stocks();
-					
+			for (int i=0; i<prodList.size(); i++) {
+				if(prodList.get(i).getId().equals(productId)) {
+					item = prodList.get(i);					
 					break;
 				}
 			}
 			
-			Product item = new Product(item_id, item_name, imageName, item_price, item_stock, item_rating);
-			
-			// forward request
-			request.setAttribute("ITEM", item);
-			request.getRequestDispatcher("item.jsp").forward(request, response);
+			if(item != null) {
+				// forward request
+				request.setAttribute("ITEM", item);
+				request.getRequestDispatcher("item.jsp").forward(request, response);
+			} else {
+				Logger.log("ITEM DOES NOT EXIST");
+				response.sendRedirect("home.jsp");
+			}
 			
 		} else {
 			response.sendRedirect("home.jsp");

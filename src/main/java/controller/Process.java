@@ -59,7 +59,7 @@ public class Process extends HttpServlet {
 			response.sendRedirect("home.jsp");
 			
 		} else {
-			Logger.log("ORDER FAILED");
+			Logger.log("ORDER PROCESS FAILED");
 			
 			// redirect Invalid.jsp (go back to cart or cancel?)
 			response.sendRedirect("cart.jsp");

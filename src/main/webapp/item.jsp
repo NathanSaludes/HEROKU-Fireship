@@ -1,3 +1,4 @@
+<%@page import="utility.Logger"%>
 <%@page import="model.Cart"%>
 <%@page import="model.Order"%>
 <%@page import="model.Product"%>
@@ -6,8 +7,16 @@
     pageEncoding="ISO-8859-1"%>
     
 <% 
-	Order order = (Order) session.getAttribute("ORDER");	
+	Order order = (Order) session.getAttribute("ORDER");
 	Product item = (Product) request.getAttribute("ITEM");
+	
+	if(order == null || item == null) {
+		Logger.error("Session expired.");
+		order = new Order();
+		item = new Product();
+		session.invalidate();
+		response.sendRedirect("App");
+	}
 %>
     
 <!DOCTYPE html>

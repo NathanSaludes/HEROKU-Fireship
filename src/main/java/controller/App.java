@@ -5,13 +5,11 @@ import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Cart;
 import model.History;
 import model.Order;
 import model.Product;
@@ -23,8 +21,11 @@ public class App extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession(false) == null) {			
+		if(request.getSession(false) == null) {
 			Logger.log(" -------- FIRESHIP SHOPPING STARTED -------- ");
+			
+			// CREATE NEW SESSION
+			HttpSession session = request.getSession();
 
 			Logger.log("Initializing application configurations");
 			Config c = new Config();
@@ -44,18 +45,12 @@ public class App extends HttpServlet {
 			sc.setAttribute("PRODUCTS_LIST", product_list);
 			sc.setAttribute("ORDER_HISTORY", order_history);
 			
-			// BIND ORDER OBJECT TO SESSION
-			HttpSession session = request.getSession();
+			// BIND ORDER TO SESSION
 			session.setAttribute("ORDER", order);
 			
 			response.sendRedirect("home.jsp");
 		} else {
 			response.sendRedirect("home.jsp");		
 		}
-	}
-	
-	@Override
-	public void destroy() {
-		System.out.println("DESTROYED");
 	}
 }

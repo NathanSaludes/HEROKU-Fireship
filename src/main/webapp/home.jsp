@@ -1,13 +1,21 @@
+<%@page import="utility.Logger"%>
 <%@page import="model.Cart"%>
 <%@page import="model.Order"%>
 <%@page import="model.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
-<% 
+<%
 	ArrayList<Product> products = (ArrayList<Product>) application.getAttribute("PRODUCTS_LIST");
 	Order order = (Order) session.getAttribute("ORDER");
-	Cart cart = order.getCart();
+	
+	if(order == null || products == null) {
+		Logger.error("Session expired.");
+		products = new ArrayList<Product>();
+		order = new Order();
+		session.invalidate();
+		response.sendRedirect("App");
+	}
 %>
 
 <!DOCTYPE html>
@@ -40,7 +48,7 @@
         <a class="cart_icon" href="cart.jsp">
         
         	<%-- SHOPPING CART STATE RENDERING | (Gray : Empty Cart) & (Yellow : Items present) ---------------------------------- --%>
-	        <% if(cart.hasItems()) { %>
+	        <% if(order.getCart().hasItems()) { %>
 	        	<i class="fas fa-shopping-cart cart_icon" style="color: #ffcd43"></i>
 	        <% } else { %>
 	            <i class="fas fa-shopping-cart cart_icon"></i>        
