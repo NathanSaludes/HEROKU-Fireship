@@ -3,12 +3,11 @@ package model;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 import exceptions.CreditCardException;
 import exceptions.OrderException;
 import utility.Logger;
-
-import model.OnlineOrderingSystem;
 
 public class Order implements OnlineOrderingSystem {
 	
@@ -17,6 +16,7 @@ public class Order implements OnlineOrderingSystem {
 	
 	private float vatRate;
 	private String dateOrdered;
+	private String orderCode;
 	
 	// COMPUTED FIELDS
 	private double grossPrice;
@@ -28,6 +28,7 @@ public class Order implements OnlineOrderingSystem {
 		user = new User();
 		vatRate = 0.00f;
 		dateOrdered = null;
+		orderCode = null;
 		grossPrice = 0.00;
 		valueAddedTax = 0.00;
 		netPrice = 0.00;
@@ -38,6 +39,7 @@ public class Order implements OnlineOrderingSystem {
 		cart 			= new Cart();	// INITIALIZE CART CONTAINER
 		user 			= null;			// USER UNSET
 		dateOrdered 	= null;			// DATE UNSET
+		orderCode		= null;
 		
 		grossPrice 		= 0.00;			// GROSS RESET
 		valueAddedTax 	= 0.00;			// VAT RESET
@@ -146,6 +148,10 @@ public class Order implements OnlineOrderingSystem {
 	}
 	/*------------------------------------------------------------ INTERFACE METHODS ------------------------------------------------------------*/	
 	
+	
+	
+	
+	
 	public Cart getCart() {
 		return this.cart;
 	}
@@ -155,8 +161,34 @@ public class Order implements OnlineOrderingSystem {
 	public String getOrderDate() {
 		return this.dateOrdered;
 	}
+	public String getOrderCode() {
+		return this.orderCode;
+	}
 	public void setOrderDate(Date date) {
 		this.dateOrdered = new SimpleDateFormat().format(new Date());
+	}
+	private void setOrderCode() {
+		if(this.orderCode == null || this.orderCode.isEmpty()) {
+			StringBuilder code = new StringBuilder();
+			String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+			
+			// generate a code
+			code.append(user.getFirstName().charAt(0));
+			int number = new Random().nextInt(9999);
+			
+			int index = 0; 
+			for(int i=0; i < 10; i++) {
+				index = (int) (AlphaNumericString.length() * Math.random());
+				
+				code.append(AlphaNumericString.charAt(index));
+			}
+			
+			code.append(user.getLastName().charAt(0));
+			code.append(number);
+			code.append(user.getFirstName().length() + (int) Math.floor((Math.random() * 123456)));
+			
+			this.orderCode = code.toString().toUpperCase();			
+		}
 	}
 	
 	
@@ -170,6 +202,7 @@ public class Order implements OnlineOrderingSystem {
 				
 				if(this.user.isCreditCardStatus()) {
 					setOrderDate(new Date());
+					setOrderCode();
 					return true; // success
 				}
 				

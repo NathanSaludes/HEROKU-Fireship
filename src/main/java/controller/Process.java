@@ -50,13 +50,15 @@ public class Process extends HttpServlet {
 			Order newOrder = new Order();
 			newOrder.reset(Float.parseFloat(getServletContext().getInitParameter("VAT_RATE")));			
 			
-			// set the new order object to the session else
-			// it will keep the data of the previous order regardless if it's valid or invalid
+			// set a new order object to the session
+			// else it will keep the data of the previous order regardless if it's invalid
 			request.getSession().setAttribute("ORDER", newOrder);
+			
 			getServletContext().setAttribute("PRODUCTS_LIST", product_list);
 			getServletContext().setAttribute("ORDER_HISTORY", order_history);
 			
-			response.sendRedirect("home.jsp");
+			request.setAttribute("ORDER", order);
+			request.getRequestDispatcher("success.jsp").forward(request, response);
 			
 		} else {
 			Logger.log("ORDER PROCESS FAILED");
