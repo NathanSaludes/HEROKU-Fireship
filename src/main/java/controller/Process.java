@@ -57,6 +57,7 @@ public class Process extends HttpServlet {
 			getServletContext().setAttribute("PRODUCTS_LIST", product_list);
 			getServletContext().setAttribute("ORDER_HISTORY", order_history);
 			
+			response.setStatus(301);
 			request.setAttribute("ORDER", order);
 			request.getRequestDispatcher("success.jsp").forward(request, response);
 			
