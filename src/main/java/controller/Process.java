@@ -18,15 +18,11 @@ public class Process extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String firstName;
-		String lastName;
-		String creditCardNumber;
-		String shippingAddress;
 		
-		firstName = request.getParameter("user_firstname").trim();
-		lastName = request.getParameter("user_lastname").trim();
-		shippingAddress = request.getParameter("shipping_address").trim();
-		creditCardNumber = request.getParameter("creditCard").trim();
+		String firstName 			= request.getParameter("user_firstname").trim();
+		String lastName 			= request.getParameter("user_lastname").trim();
+		String shippingAddress 		= request.getParameter("shipping_address").trim();
+		String creditCardNumber 	= request.getParameter("creditCard").trim();
 		
 		User newUser = new User(firstName, lastName, shippingAddress, creditCardNumber);
 		
@@ -63,9 +59,7 @@ public class Process extends HttpServlet {
 			
 		} else {
 			Logger.log("ORDER PROCESS FAILED");
-			
-			// redirect Invalid.jsp (go back to cart or cancel?)
-			response.sendRedirect("cart.jsp");
+			response.sendRedirect("invalid.jsp");
 		}
 	}
 

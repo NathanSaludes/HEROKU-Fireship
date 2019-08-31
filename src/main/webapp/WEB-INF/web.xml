@@ -42,6 +42,12 @@
 		<description></description>
 		<servlet-class>controller.Item</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Cancel</servlet-name>
+		<display-name>Cancel</display-name>
+		<description></description>
+		<servlet-class>controller.Cancel</servlet-class>
+	</servlet>
 	
 	
 	
@@ -66,6 +72,10 @@
 	<servlet-mapping>
 		<servlet-name>Item</servlet-name>
 		<url-pattern>/Item</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Cancel</servlet-name>
+		<url-pattern>/Cancel</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>

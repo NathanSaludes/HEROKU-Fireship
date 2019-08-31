@@ -1,0 +1,148 @@
+@charset "ISO-8859-1";
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:500,800&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700&display=swap');
+
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+/* navigation bar */
+nav {
+	background-color: #ffffff;
+	width: 100%;
+
+	align-items: center;
+	justify-content: space-between;
+	text-align: center;
+	
+	padding: 5px;
+	border-bottom: 0.3px #e6e6e6 solid;
+	
+	display: flex;
+	position: fixed;
+	top: 0;
+
+	z-index: 5;
+}
+
+.fireship_logo {
+	margin-left: 10px;
+	height: 35px;
+}
+
+.cart_icon {
+	padding-right: 10px;
+	color: #D6D6D6;
+}
+
+.cart_icon:hover {
+	color: #FF9B9B;
+}
+
+
+
+
+
+
+.wrapper_container {
+	max-width: 100%;
+	margin: 200px auto 0px auto;
+	display: grid;
+	justify-items: center;
+	/* padding-bottom: 50px; */
+	/* background-color: yellowgreen; */
+}
+
+.image_container {
+	width: 120px;
+	/* height: 30px; */
+	/* background-color: #FF9B9B; */
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+.shopping_bag_graphic {
+	width: 100%;
+	height: 100%;
+}
+
+.banner {
+	width: 90%;
+	display: grid;
+	/* background-color: #FF9B9B; */
+	justify-items: center;
+	align-content: center;
+	margin-top: 10px;
+}
+
+.error {
+	color: #D6D6D6;
+	font-family: 'Google Sans', sans-serif;
+	font-size: 15px;
+}
+
+.process_buttons_container {
+	/* background-color: #e6e6e6; */
+	width: 100%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	color: #D6D6D6;
+}
+
+.back_button {
+	background-color: #FF9B9B;
+	color: white;
+	border-radius: 5px;
+	border: none;
+	padding: 10px 15px;
+	margin: 10px;
+	font-size: 15px;
+}
+
+.cancel_order_button {
+	background-color: #FFF;
+	color: #FF9B9B;
+	border-radius: 5px;
+	border: 1px #ff9b9b3d solid;
+	padding: 10px 15px;
+	margin: 10px;
+	font-size: 15px;
+}
+
+.process_buttons_container a:hover {
+	cursor: pointer;	
+}
+
+.back_button:hover, .cancel_order_button:hover {
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 768px) {
+
+	.shopping_bag_graphic {
+		max-width: 100%;
+		height: 100%;
+	}
+
+	.banner {
+		max-width: 600px;
+	}
+
+	.error {
+		color: #D6D6D6;
+		font-family: 'Google Sans', sans-serif;
+		font-size: 25px;
+	}
+}

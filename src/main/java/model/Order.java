@@ -78,32 +78,43 @@ public class Order implements OnlineOrderingSystem {
 	@Override
 	public void validateCreditCard() {
 		try {
-			String creditCard = user.getCreditCard();
+			String creditCard = new StringBuilder(user.getCreditCard()).reverse().toString();
 			
 			if(creditCard.length() == 16) {
-				int sum = 0;
-				int digit = 0;
+				int finalSum 	= 0;	// sum of both partial sumss
+				int s1 			= 0;	// partial sum for numbers with even indexes
+				int s2			= 0;	// partial sum for numbers with odd indexes
+				int curr_num	= 0;	// current number being evaluated
+				int doubled 	= 0;	// current number multiplied by two (or doubled)
 				
 				for (int i = 0; i < creditCard.length(); i++) {
-					digit = Character.getNumericValue(creditCard.charAt(i));
+					curr_num = Character.getNumericValue(creditCard.charAt(i));
 					
 					if(i % 2 == 0) {
-						if((digit * 2) > 9) { 															// if the double of a number is composed of 2 digits...
-			        		int firstD = Integer.parseInt(Integer.toString(digit * 2).substring(0, 1)); // then get the first digit...
-			        		int secondD = Integer.parseInt(Integer.toString(digit * 2).substring(1));	// then get the second digit...
-			        		int tempSum = firstD + secondD; 											// then get the sum of the two digits...
-			        		sum += tempSum; 															// then store
-			        		
-			        	} else {
-			        		sum += digit;
-			        	}
+						// if the index of a number is even, add the number directly to the sum
+						s1 += curr_num;
+						
 					} else {
-						sum += digit;
+						// if the index of a number is odd, check if the double of a number is greater than 9 (which means a "two digit number")
+						doubled = curr_num * 2;
+						
+						// check if the double of the current number is a 'two digit number'
+						if(doubled > 9) { 																// if the double of a number is composed of 2 digits...
+							int firstD 	= Integer.parseInt(Integer.toString(doubled).substring(0, 1)); 	// then get the first digit...
+							int secondD = Integer.parseInt(Integer.toString(doubled).substring(1));		// then get the second digit...
+							int tempSum = firstD + secondD; 											// then get the sum of the two digits...
+							s2 += tempSum; 																// then store
+							
+						} else {
+							s2 += doubled;
+						}
 					}
 				}
 				
+				finalSum = s1 + s2;
+				
 				// if the final sum of the process is divisible by 10, the credit card is valid...
-			    if (sum%10 == 0) {
+			    if (finalSum%10 == 0) {
 			    	user.setCreditCardStatus(true);
 			    } else {
 			    	user.setCreditCardStatus(false);

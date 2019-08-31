@@ -21,7 +21,7 @@ public class Config {
 	private ArrayList<Product> extractFileContent(ArrayList<Product> product_list) {
 		try {
 			String path = getClass().getClassLoader().getResource("products.xml").getFile();
-			File file = new File(path);
+			File file 	= new File(path);
 			
 			// DOM PARSER (READ PRODUCTS.XML FILE)
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -75,4 +75,5 @@ public class Config {
 		
 		return product_list;
 	}
+	
 }

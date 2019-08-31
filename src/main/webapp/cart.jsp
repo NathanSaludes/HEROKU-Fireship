@@ -70,12 +70,12 @@
             %>
 	            <div class="item">
 	                <div class="item_image_container">
-	                    <a href="item.jsp?id=<%= item.getId() %>">
+	                    <a href="Item?id=<%= item.getId() %>">
 	                        <img class="product_image" src="./assets/item_images/<%= item.getImage_path() %>" alt="<%= item.getName() %>">
 	                    </a>
 	                </div>
 	                <div class="item_info">
-	                    <a href="item.jsp?id=<%= item.getId() %>">
+	                    <a href="Item?id=<%= item.getId() %>">
 	                        <p class="product_name"><%= item.getName() %></p>
 	                    </a>
 	                    <div class="rating">
