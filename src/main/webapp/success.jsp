@@ -112,9 +112,11 @@
 		</div>
 
 		<!-- DOWNLOAD BUTTON -->
-		<button id="buttonGeneratePDF">
-			<i class="fas fa-file-pdf"></i> Download PDF
-		</button>
+		<a download="Fireship.pdf">
+			<button id="buttonGeneratePDF">
+				<i class="fas fa-file-pdf"></i> Download PDF
+			</button>
+		</a>
 	</div>
 
 	<script src="https://kit.fontawesome.com/24fa509132.js"></script>
