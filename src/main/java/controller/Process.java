@@ -37,7 +37,7 @@ public class Process extends HttpServlet {
 			History order_history = (History) getServletContext().getAttribute("ORDER_HISTORY");
 			
 			// create PDF file for user receipt
-			order.generatePDFReceipt();
+			order.generatePDFReceipt("C:\\DEV\\iACADEMY_WORKSPACE\\ENTJAV2\\Fireship\\src\\main\\webapp\\pdf\\");
 			
 			// record/add recent order to history
 			order_history.log(order);

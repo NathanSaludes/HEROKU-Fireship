@@ -6,5 +6,5 @@ public interface OnlineOrderingSystem {
 	void computeVAT();
 	void netPay();
 	void printPDFSalesReport(); //terminates the app, after checkout
-	void generatePDFReceipt(); //pdf as sales receipt
+	void generatePDFReceipt(String dest); //pdf as sales receipt
 }

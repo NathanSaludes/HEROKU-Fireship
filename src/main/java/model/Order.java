@@ -9,7 +9,12 @@ import java.util.Random;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPRow;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import exceptions.CreditCardException;
@@ -162,17 +167,25 @@ public class Order implements OnlineOrderingSystem {
 	}
 
 	@Override
-	public void generatePDFReceipt() {
+	public void generatePDFReceipt(String dest) {
 		Document document = new Document();
 		try {
-			String fileName = "TransacReceipt.pdf";
-			String path = "C:\\Users\\Guest Account\\Git\\HEROKU-Fireship\\src\\main\\resources\\" + fileName;
+			String fileName = "\\receipt.pdf";
+			String path = dest + fileName;
 
 			Document doc = new Document();
 			PdfWriter.getInstance(doc, new FileOutputStream(path));
 			doc.open();
-			doc.add(new Paragraph("Hello World!"));
+			
+			PdfPTable table = new PdfPTable(2);
+			PdfPCell cell = new PdfPCell(new Phrase("Cell with colspan 2"));
+			cell.setColspan(2);
+			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.addCell(cell);
+			
+			doc.add(table);
 			doc.close();
+			
 		} catch (DocumentException de) {
 			System.err.println(de.getMessage());
 		} catch (FileNotFoundException fnfe) {
