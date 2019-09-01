@@ -39,7 +39,7 @@
 
 	<nav>
 		<a href="home.jsp">
-			<img class="fireship_logo" src="./assets/Fireship.svg" alt="Fireship">
+			<img class="fireship_logo" src="./assets/fireship.png" alt="Fireship">
 		</a>
 		<a class="cart_icon" href="./cart.html">
 			<i class="fas fa-shopping-cart cart_icon"></i>

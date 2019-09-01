@@ -2,7 +2,7 @@
 
 <item-list>
 	<item>
-		<id>2015-02034</id>
+		<id>HVUHW2546</id>
 		<name>Dell XPS 15 9570 Gaming Laptop 8th Gen Intel i9-8950HK 6 cores NVIDIA GTX 1050Ti 4GB 15.6" 4K UHD Anti-Reflective Touch (1TB SSD|32GB RAM|WIN 10 PRO)</name>
 		<price>155786.84</price>
 		<stocks>100</stocks>
@@ -12,7 +12,7 @@
 	</item>
 
 	<item>
-		<id>2016-15645</id>
+		<id>UDHKEGH84</id>
 		<name>MSI GS65 Stealth-002 15.6" Razor Thin Bezel Gaming Laptop NVIDIA RTX 2070 8G Max-Q, 144Hz 7ms, Intel i7-8750H (6 cores), 32GB, 512GB NVMe SSD, TB3, Per Key RGB, Win 10, Matte Black w/ Gold Diamond cut</name>
 		<price>136097.93</price>
 		<stocks>100</stocks>
@@ -21,7 +21,7 @@
 	</item>
 
 	<item>
-		<id>2019-04565</id>
+		<id>OHEKJ7435</id>
 		<name>ASUS ROG Zephyrus S Ultra Slim Gaming Laptop, 15.6” 144Hz IPS Type, Intel i7-8750H Processor, GeForce GTX 1070 8GB, 24GB DDR4, 1TB PCIe NVMe SSD, Military-Grade Chassis, Windows 10 Home - GX531GS-AH78</name>
 		<price>62576.25</price>
 		<stocks>100</stocks>
@@ -30,11 +30,20 @@
 	</item>
 
 	<item>
-		<id>2569-89545</id>
+		<id>KUSDE5668</id>
 		<name>Acer Predator Helios 300 Gaming Laptop PC, 15.6" Full HD 144Hz 3ms IPS Display, Intel i7-9750H, GTX 1660 Ti 6GB, 16GB DDR4, 256GB	PCIe NVMe SSD, Backlit Keyboard, PH315-52-78VL</name>
 		<price>62576.25</price>
 		<stocks>100</stocks>
 		<image-name>712a83USPrL._SL1500_.jpg</image-name>
+		<rating>4</rating>
+	</item>
+	
+	<item>
+		<id>KWSJUE486</id>
+		<name>Razer Blade 15 Gaming Laptop 2019 - Intel Core i7-9750H 6 Core, GeForce RTX 2060, 15.6" FHD 1080p 144Hz, 16GB RAM, 512GB SSD, CNC Aluminum, Chroma RGB Lighting, Thunderbolt 3 Compatible</name>
+		<price>99055.98</price>
+		<stocks>0</stocks>
+		<image-name>71NIJloNGoL._SL1500_.jpg</image-name>
 		<rating>4</rating>
 	</item>
 </item-list>

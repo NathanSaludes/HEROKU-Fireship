@@ -155,7 +155,7 @@ public class Order implements OnlineOrderingSystem {
 	}
 
 	@Override
-	public void generatePDFReceipt() {		
+	public void generatePDFReceipt() {
 	}
 	/*------------------------------------------------------------ INTERFACE METHODS ------------------------------------------------------------*/	
 	

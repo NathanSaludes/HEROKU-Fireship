@@ -34,21 +34,22 @@ public class Process extends HttpServlet {
 		if(order.processOrder(newUser)) {
 			Logger.log("ORDER TRANSACTION SUCCESS. [Order date]: " + order.getOrderDate());
 			ArrayList<Product> product_list = (ArrayList<Product>) getServletContext().getAttribute("PRODUCTS_LIST");
-			History order_history = (History) getServletContext().getAttribute("ORDER_HISTORY");
+			History order_history = (History) getServletContext().getAttribute("ORDER_HISTORY");			
 			
-			// record/add order to history
+			// record/add recent order to history
 			order_history.log(order);
 		
 			// update stocks of each product
 			product_list = order.updateStocks(product_list);
 			
+			
 			// reset order object to prepare for the next order
 			Order newOrder = new Order();
 			newOrder.reset(Float.parseFloat(getServletContext().getInitParameter("VAT_RATE")));			
 			
-			// set a new order object to the session
-			// else it will keep the data of the previous order regardless if it's invalid
+			// attach new order object to session
 			request.getSession().setAttribute("ORDER", newOrder);
+			
 			
 			getServletContext().setAttribute("PRODUCTS_LIST", product_list);
 			getServletContext().setAttribute("ORDER_HISTORY", order_history);

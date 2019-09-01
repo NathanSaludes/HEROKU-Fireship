@@ -73,7 +73,11 @@
 	            <a href="Item?id=<%= product.getId() %>">
 	                <div class="item"> <!-- ITEM CARD -->
 	                    <div class="product_image_container">
-	                        <img class="product_image" src="./assets/item_images/<%= product.getImage_path() %>" alt="">
+	                    	<% if(product.getItem_stocks() > 0) { %>                    
+	                        	<img class="product_image" src="./assets/item_images/<%= product.getImage_path() %>" alt="<%= product.getName() %>">
+	                        <% } else { %>
+	                        	<img class="product_image" src="./assets/item_images/soldout.png" alt="<%= product.getName() %>">
+	                        <% } %>
 	                    </div>
 	                    <div class="product_info">
 	                        <p class="product_name"><%= product.getName() %></p>
