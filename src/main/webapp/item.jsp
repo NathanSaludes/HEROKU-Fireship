@@ -64,7 +64,11 @@
         </a>
         <div class="product_view">
             <div class="image_container">
-                <img class="product_image" src="./assets/item_images/<%= item.getImage_path() %>" alt="<%= item.getImage_path() %>">
+            	<% if(item.getItem_stocks() > 0) { %> 
+                	<img class="product_image" src="./assets/item_images/<%= item.getImage_path() %>" alt="<%= item.getImage_path() %>">
+               	<% } else { %>
+               		<img class="product_image" src="./assets/item_images/soldout.png" alt="<%= item.getImage_path() %>">
+               	<% } %>
             </div>
             <div class="product_details">
                 <p class="product_name"><%= item.getName() %></p>
@@ -88,9 +92,17 @@
                     <!-- --------------------------------------------------------------------------------------- -->
                     
                     <label class="quantity_label" for="item_quantity">Quantity: </label>
-                    <input class="quantity_field" type="number" min="1" max="<%= item.getItem_stocks() %>" name="quantity" required="required" value="1">
+                    <% if(item.getItem_stocks() > 0) { %> 
+	                    <input class="quantity_field" type="number" min="1" max="<%= item.getItem_stocks() %>" name="quantity" required="required" value="1">	                                  	
+	               	<% } else { %>
+	               		<input class="quantity_field" type="number" min="0" max="<%= item.getItem_stocks() %>" name="quantity" required="required" value="1" disabled="disabled">
+	               	<% } %>
                     <br>
-                    <input class="add_button" type="submit" value="Add to Cart">
+                    <% if(item.getItem_stocks() > 0) { %> 
+	                    <input class="add_button" type="submit" value="Add to Cart">                	
+	               	<% } else { %>
+	               		<input class="add_button" type="submit" value="Add to Cart" disabled="disabled" style="background-color:#dcdcdc;">
+	               	<% } %>
                 </form>
                 
             </div>

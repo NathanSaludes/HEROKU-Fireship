@@ -112,7 +112,7 @@
 		</div>
 
 		<!-- DOWNLOAD BUTTON -->
-		<a download="Fireship.pdf">
+		<a href="./assets/item_images/610nCTujzVL._SL1158_.jpg" download>
 			<button id="buttonGeneratePDF">
 				<i class="fas fa-file-pdf"></i> Download PDF
 			</button>

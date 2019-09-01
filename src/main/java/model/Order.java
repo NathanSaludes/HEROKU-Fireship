@@ -1,9 +1,16 @@
 package model;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import exceptions.CreditCardException;
 import exceptions.OrderException;
@@ -156,6 +163,21 @@ public class Order implements OnlineOrderingSystem {
 
 	@Override
 	public void generatePDFReceipt() {
+		Document document = new Document();
+		try {
+			String fileName = "TransacReceipt.pdf";
+			String path = "C:\\Users\\Guest Account\\Git\\HEROKU-Fireship\\src\\main\\resources\\" + fileName;
+
+			Document doc = new Document();
+			PdfWriter.getInstance(doc, new FileOutputStream(path));
+			doc.open();
+			doc.add(new Paragraph("Hello World!"));
+			doc.close();
+		} catch (DocumentException de) {
+			System.err.println(de.getMessage());
+		} catch (FileNotFoundException fnfe) {
+			System.err.println(fnfe.getMessage());
+		}
 	}
 	/*------------------------------------------------------------ INTERFACE METHODS ------------------------------------------------------------*/	
 	

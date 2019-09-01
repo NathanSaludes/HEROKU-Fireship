@@ -34,7 +34,10 @@ public class Process extends HttpServlet {
 		if(order.processOrder(newUser)) {
 			Logger.log("ORDER TRANSACTION SUCCESS. [Order date]: " + order.getOrderDate());
 			ArrayList<Product> product_list = (ArrayList<Product>) getServletContext().getAttribute("PRODUCTS_LIST");
-			History order_history = (History) getServletContext().getAttribute("ORDER_HISTORY");			
+			History order_history = (History) getServletContext().getAttribute("ORDER_HISTORY");
+			
+			// create PDF file for user receipt
+			order.generatePDFReceipt();
 			
 			// record/add recent order to history
 			order_history.log(order);
